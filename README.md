@@ -1,5 +1,11 @@
 # Prime Gaming Luna Hider
 Hides selected areas on Prime Gaming Luna website.
+- Hide: Benefits Banner
+- Hide: Featured Content
+- Hide: Top Games To Claim
+- Hide: GameNight Banner
+- Hide: LUNA Cloud Games section
+- Hide: PRIME Games section
 
 <img width="726" height="507" alt="Luna Page Popup" src="https://github.com/user-attachments/assets/835edc87-2203-491a-8a58-dce567ced07f" />
 
