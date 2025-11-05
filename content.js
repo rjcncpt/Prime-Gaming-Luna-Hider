@@ -1,10 +1,10 @@
 function applySettings(data) {
-  console.log('Anwenden der Einstellungen:', data);
+  console.log('Applying settings:', data);
   const fgwpSection = document.getElementById('offer-section-FGWP');
   const lunaSection = document.getElementById('offer-section-LUNA');
   const fgwp_fullSection = document.getElementById('offer-section-FGWP_FULL');
   const benefitsBanner = document.querySelector('[data-a-target="benefits-banner"]');
-  const GameNightBanner = document.querySelector('[data-a-target="GameNightBannerSectionRootHome"]');
+  const gameNightBanner = document.querySelector('[data-a-target="GameNightBannerSectionRootHome"]');
   const featuredContent = document.querySelector('.featured-content');
 
   if (data.hideFgwp && fgwpSection) {
@@ -13,35 +13,35 @@ function applySettings(data) {
   } else if (data.hideFgwp) {
     console.log('FGWP area not found');
   }
-  
+
   if (data.hideLuna && lunaSection) {
     lunaSection.style.display = 'none';
     console.log('LUNA area hidden');
   } else if (data.hideLuna) {
     console.log('LUNA area not found');
   }
-  
+
   if (data.hideFgwp_Full && fgwp_fullSection) {
     fgwp_fullSection.style.display = 'none';
     console.log('FGWP_FULL area hidden');
   } else if (data.hideFgwp_Full) {
     console.log('FGWP_FULL area not found');
   }
-  
-  if (data.hideGameNightBanner && GameNightBanner) {
-	  GameNightBanner.style.setProperty('display', 'none', 'important');
-	  console.log('GameNight Banner hidden');
-	} else if (data.hideGameNightBanner) {
-	  console.log('GameNight Banner not found');
-	}
-  
+
+  if (data.hideGameNightBanner && gameNightBanner) {
+    gameNightBanner.style.setProperty('display', 'none', 'important');
+    console.log('GameNight Banner hidden');
+  } else if (data.hideGameNightBanner) {
+    console.log('GameNight Banner not found');
+  }
+
   if (data.hideBenefitsBanner && benefitsBanner) {
-	  benefitsBanner.style.setProperty('display', 'none', 'important');
-	  console.log('Benefits Banner hidden');
-	} else if (data.hideBenefitsBanner) {
-	  console.log('Benefits Banner not found');
-	}
-  
+    benefitsBanner.style.setProperty('display', 'none', 'important');
+    console.log('Benefits Banner hidden');
+  } else if (data.hideBenefitsBanner) {
+    console.log('Benefits Banner not found');
+  }
+
   if (data.hideFeaturedContent && featuredContent) {
     featuredContent.style.display = 'none';
     console.log('Featured Content hidden');
@@ -50,13 +50,13 @@ function applySettings(data) {
   }
 }
 
-// Funktion für CSS-Alert
+// Function for showing a custom CSS alert
 function showAlert(message) {
-  // Entferne bestehende Alerts
+  // Remove any existing alerts
   const existingAlert = document.getElementById('custom-alert');
   if (existingAlert) existingAlert.remove();
 
-  // Erstelle Alert-Element
+  // Create alert element
   const alertDiv = document.createElement('div');
   alertDiv.id = 'custom-alert';
   alertDiv.innerText = message;
@@ -68,31 +68,37 @@ function showAlert(message) {
   `;
   document.body.appendChild(alertDiv);
 
-  // Verblassen nach 3 Sekunden
+  // Fade out after 3 seconds
   setTimeout(() => {
     alertDiv.style.opacity = '0';
     setTimeout(() => alertDiv.remove(), 500);
   }, 3000);
 }
 
-// Initiale Anwendung der Einstellungen
-chrome.storage.local.get(['hideLuna', 'hideFgwp', 'hideFgwp_Full', 'hideGameNightBanner', 'hideBenefitsBanner', 'hideFeaturedContent'], (data) => {
-  console.log('Initial settings:', data);
-  applySettings(data);
-});
-
-// MutationObserver für dynamische Änderungen
-const observer = new MutationObserver(() => {
-  chrome.storage.local.get(['hideLuna', 'hideFgwp', 'hideFgwp_Full', 'hideGameNightBanner', 'hideBenefitsBanner', 'hideFeaturedContent'], (data) => {
+// Initial settings application
+chrome.storage.local.get(
+  ['hideLuna', 'hideFgwp', 'hideFgwp_Full', 'hideGameNightBanner', 'hideBenefitsBanner', 'hideFeaturedContent'],
+  (data) => {
+    console.log('Initial settings:', data);
     applySettings(data);
-  });
+  }
+);
+
+// MutationObserver to handle dynamic content changes
+const observer = new MutationObserver(() => {
+  chrome.storage.local.get(
+    ['hideLuna', 'hideFgwp', 'hideFgwp_Full', 'hideGameNightBanner', 'hideBenefitsBanner', 'hideFeaturedContent'],
+    (data) => {
+      applySettings(data);
+    }
+  );
 });
 observer.observe(document.body, { childList: true, subtree: true });
 
-// Listener für Einstellungsänderungen und Alerts
+// Listener for settings updates and alerts
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === 'updateSettings') {
-    console.log('Receive settings update:', message.settings);
+    console.log('Received settings update:', message.settings);
     applySettings(message.settings);
     if (message.showAlert) {
       showAlert(message.showAlert.message);

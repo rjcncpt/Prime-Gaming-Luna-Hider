@@ -4,7 +4,7 @@
   "version": "1.1",
   "author": "rjcncpt",
   "short_name": "PrimeGamingHider",
-  "description": "Blendet ausgewählte Bereiche auf Prime Gaming aus.",
+  "description": "Hides selected areas on Prime Gaming website.",
   "permissions": ["storage"],
   "action": {
     "default_popup": "popup.html"
