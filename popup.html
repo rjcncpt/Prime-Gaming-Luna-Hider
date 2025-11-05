@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Prime Gaming Hider – Settings</title>
+  <style>
+    :root {
+      --luna-bg: #1b0a2a;
+      --luna-accent: #8540f5;
+      --luna-accent-light: #a674ff;
+      --luna-text: #ffffff;
+      --luna-muted: #cfc3e6;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: var(--luna-bg);
+      color: var(--luna-text);
+      margin: 0;
+      padding: 20px;
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    h2 {
+      text-align: center;
+      margin: 0;
+      font-size: 1.3em;
+      color: var(--luna-accent-light);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+      cursor: pointer;
+    }
+
+    label:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--luna-accent);
+      transform: scale(1.2);
+    }
+
+    button {
+      background-color: var(--luna-accent);
+      color: var(--luna-text);
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+      background-color: var(--luna-accent-light);
+      transform: scale(1.02);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+  <h2>Prime Gaming Hider</h2>
+  <div class="checkbox-group">
+    <label><span>Hide: Benefits Banner</span><input type="checkbox" id="hideBenefitsBanner"></label>
+    <label><span>Hide: Featured Content</span><input type="checkbox" id="hideFeaturedContent"></label>
+    <label><span>Hide: Top Games To Claim</span><input type="checkbox" id="hideFgwp"></label>
+    <label><span>Hide: GameNight Banner</span><input type="checkbox" id="hideGameNightBanner"></label>
+    <label><span>Hide: LUNA Cloud Games section</span><input type="checkbox" id="hideLuna"></label>
+    <label><span>Hide: PRIME Games section</span><input type="checkbox" id="hideFgwp_Full"></label>
+  </div>
+  <button id="save">Save</button>
+  <script src="popup.js"></script>
+</body>
+</html>
