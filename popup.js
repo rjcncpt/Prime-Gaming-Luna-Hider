@@ -49,3 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+document.addEventListener('click', (e) => {
+  if (e.target.tagName === 'A' && e.target.href.startsWith('http')) {
+    e.preventDefault();
+    chrome.tabs.create({ url: e.target.href });
+  }
+});
